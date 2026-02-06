@@ -1,10 +1,10 @@
 ﻿using Newtonsoft.Json.Linq;
 
-namespace RestAPI
+namespace AzDoCoreLib
 {
     public class Utility
     {
-        public static string GeterroMessage(string Exception)
+        public static string GetErrorMessage(string Exception)
         {
             string message = string.Empty;
             try

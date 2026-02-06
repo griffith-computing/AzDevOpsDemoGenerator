@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using Newtonsoft.Json;
 using RestAPI.Viewmodel.Queue;
 using System.Net.Http.Json;
@@ -40,7 +41,7 @@ namespace RestAPI.Queues
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -82,7 +83,7 @@ namespace RestAPI.Queues
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }

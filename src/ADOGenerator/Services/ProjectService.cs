@@ -1,5 +1,8 @@
 using ADOGenerator.IServices;
 using ADOGenerator.Models;
+using AzDoCoreLib;
+using AzDoTeamsLib;
+using AzDoTeamsLib.ViewModel;
 using Microsoft.Extensions.Configuration;
 using Microsoft.VisualStudio.Services.Common;
 using Microsoft.VisualStudio.Services.ExtensionManagement.WebApi;
@@ -22,7 +25,6 @@ using RestAPI.Viewmodel.BranchPolicy;
 using RestAPI.Viewmodel.Extractor;
 using RestAPI.Viewmodel.GitHub;
 using RestAPI.Viewmodel.Importer;
-using RestAPI.Viewmodel.ProjectAndTeams;
 using RestAPI.Viewmodel.QueriesAndWidgets;
 using RestAPI.Viewmodel.Repository;
 using RestAPI.Viewmodel.Sprint;
@@ -1308,7 +1310,7 @@ namespace ADOGenerator.Services
             try
             {
                 TeamMemberResponse.TeamMembers viewModel = new TeamMemberResponse.TeamMembers();
-                RestAPI.ProjectsAndTeams.Teams objTeam = new RestAPI.ProjectsAndTeams.Teams(_configuration);
+                Teams objTeam = new Teams(_configuration);
                 viewModel = objTeam.GetTeamMembers(projectName, teamName);
 
                 if (!(string.IsNullOrEmpty(objTeam.LastFailureMessage)))
@@ -2461,7 +2463,7 @@ namespace ADOGenerator.Services
                         if (isDashboardDeleted)
                         {
                             string startdate = DateTime.Now.ToString("yyyy-MM-dd");
-                            RestAPI.ProjectsAndTeams.Teams objTeam = new RestAPI.ProjectsAndTeams.Teams(_projectConfig);
+                            Teams objTeam = new Teams(_projectConfig);
                             TeamResponse defaultTeam = objTeam.GetTeamByName(model.ProjectName, model.ProjectName + " team");
                             RestAPI.WorkItemAndTracking.ClassificationNodes objnodes = new RestAPI.WorkItemAndTracking.ClassificationNodes(_boardConfig);
                             SprintResponse.Sprints sprints = objnodes.GetSprints(model.ProjectName);

@@ -6,6 +6,7 @@ using RestAPI.Extractor;
 using RestAPI.ProjectsAndTeams;
 using RestAPI;
 using ADOGenerator;
+using AzDoCoreLib;
 
 public class TemplateService : ITemplateService
 {

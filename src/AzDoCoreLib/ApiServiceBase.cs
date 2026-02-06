@@ -1,7 +1,7 @@
 ﻿using System.Configuration;
 using System.Net.Http.Headers;
 
-namespace RestAPI
+namespace AzDoCoreLib
 {
     public abstract class ApiServiceBase
     {

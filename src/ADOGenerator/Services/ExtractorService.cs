@@ -10,7 +10,6 @@ using RestAPI.ProjectsAndTeams;
 using RestAPI.Viewmodel.Extractor;
 using RestAPI.Viewmodel.GitHub;
 using RestAPI.Viewmodel.Plans;
-using RestAPI.Viewmodel.ProjectAndTeams;
 using RestAPI;
 using System;
 using System.Collections.Generic;
@@ -20,10 +19,12 @@ using System.Text;
 using System.Threading.Tasks;
 using static RestAPI.Viewmodel.Extractor.GetServiceEndpoints;
 using static RestAPI.Viewmodel.Plans.DeliveryPlans;
-using Configuration = RestAPI.ADOConfiguration;
+using Configuration = AzDoCoreLib.ADOConfiguration;
 using RestAPI.QueriesAndWidgets;
 using Microsoft.Extensions.Configuration;
 using static ADOGenerator.Models.TemplateSelection;
+using AzDoCoreLib;
+using AzDoTeamsLib.ViewModel;
 //using ADOProjectConfigurations = ADOGenerator.Models.ADOProjectConfigurations;
 
 namespace ADOGenerator.Services
@@ -535,7 +536,7 @@ namespace ADOGenerator.Services
                                 else
                                 {
                                     var errorMessage = response.Content.ReadAsStringAsync();
-                                    string error = RestAPI.Utility.GeterroMessage(errorMessage.Result.ToString());
+                                    string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                                     teamNodes.LastFailureMessage = error;
                                     con.Id.ErrorId().AddMessage("Error occured while exporting Board Columns: " + teamNodes.LastFailureMessage);
                                 }
@@ -569,7 +570,7 @@ namespace ADOGenerator.Services
                                 else
                                 {
                                     var errorMessage = cardFieldResponse.Content.ReadAsStringAsync();
-                                    string error = RestAPI.Utility.GeterroMessage(errorMessage.Result.ToString());
+                                    string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                                     teamNodes.LastFailureMessage = error;
                                     con.Id.ErrorId().AddMessage("Error occured while exporting Card Fields: " + teamNodes.LastFailureMessage);
                                 }
@@ -597,7 +598,7 @@ namespace ADOGenerator.Services
                                 else
                                 {
                                     var errorMessage = cardStyleResponse.Content.ReadAsStringAsync();
-                                    string error = RestAPI.Utility.GeterroMessage(errorMessage.Result.ToString());
+                                    string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                                     teamNodes.LastFailureMessage = error;
                                     con.Id.ErrorId().AddMessage("Error occured while exporting Card Styles: " + teamNodes.LastFailureMessage);
                                 }

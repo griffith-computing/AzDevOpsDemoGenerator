@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using Newtonsoft.Json;
 using RestAPI.Viewmodel.Extractor;
 using System.Text;

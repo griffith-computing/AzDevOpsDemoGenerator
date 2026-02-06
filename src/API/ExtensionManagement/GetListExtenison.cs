@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AzDoCoreLib;
+using Newtonsoft.Json;
 using RestAPI.Viewmodel.Extractor;
 
 namespace RestAPI.ExtensionManagement
@@ -25,7 +26,7 @@ namespace RestAPI.ExtensionManagement
                 else
                 {
                     var errorMessage = response.Content.ReadAsStringAsync();
-                    string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                    string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                     this.LastFailureMessage = error;
                     return new GetExtensions.ExtensionsList();
                 }

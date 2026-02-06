@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using AzDoCoreLib;
+using System.Net;
 using System.Text;
 
 namespace RestAPI.Git

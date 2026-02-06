@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using Newtonsoft.Json;
 using RestAPI.Viewmodel.Extractor;
 using System.Net;
@@ -50,7 +51,7 @@ namespace RestAPI.Extractor
                     if (!response.IsSuccessStatusCode || response.StatusCode != HttpStatusCode.OK)
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                     else
@@ -120,7 +121,7 @@ namespace RestAPI.Extractor
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
@@ -152,7 +153,7 @@ namespace RestAPI.Extractor
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
@@ -224,7 +225,7 @@ namespace RestAPI.Extractor
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }

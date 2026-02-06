@@ -1,4 +1,4 @@
-﻿namespace RestAPI.ProjectsAndTeams
+﻿namespace AzDoTeamsLib
 {
     public class TeamIterations
     {
