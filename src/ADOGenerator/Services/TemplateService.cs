@@ -3,7 +3,7 @@ using ADOGenerator.Models;
 using ADOGenerator.Services;
 using Microsoft.Extensions.Configuration;
 using RestAPI.Extractor;
-using RestAPI.ProjectsAndTeams;
+using AzDoTeamsLib;
 using RestAPI;
 using ADOGenerator;
 using AzDoCoreLib;
