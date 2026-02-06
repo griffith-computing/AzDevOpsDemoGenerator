@@ -81,6 +81,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\API\API.csproj" />
 	  <ProjectReference Include="..\AzDoCoreLib\AzDoCoreLib.csproj" />
+	  <ProjectReference Include="..\AzDoTeamsLib\AzDoTeamsLib.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
