@@ -1,6 +1,6 @@
 ﻿using AzDoModelsLib.Models;
 
-namespace ADOGenerator.IServices
+namespace AzDoCoreLib.Interface
 {
     public interface IProjectService
     {
