@@ -1,4 +1,4 @@
-﻿namespace RestAPI.Viewmodel.ProjectAndTeams
+﻿namespace AzDoTeamsLib.ViewModel
 {
     public class TeamResponse
     {

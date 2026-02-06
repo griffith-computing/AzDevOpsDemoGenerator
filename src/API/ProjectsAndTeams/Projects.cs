@@ -1,9 +1,10 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using AzDoTeamsLib.ViewModel;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestAPI.Extractor;
 using RestAPI.Viewmodel.Extractor;
-using RestAPI.Viewmodel.ProjectAndTeams;
 using System.Net;
 using System.Text;
 
@@ -87,7 +88,7 @@ namespace RestAPI.ProjectsAndTeams
                         }
                         else
                         {
-                            error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                            error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         }
                         LastFailureMessage = error;
                         logger.Info(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t" + error + "\n");
@@ -124,7 +125,7 @@ namespace RestAPI.ProjectsAndTeams
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -158,7 +159,7 @@ namespace RestAPI.ProjectsAndTeams
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -212,7 +213,7 @@ namespace RestAPI.ProjectsAndTeams
                             else
                             {
                                 var errorMessage = response1.Content.ReadAsStringAsync();
-                                string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                                string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                                 this.LastFailureMessage = error;
                                 return new ProjectProperties.Properties();
                             }
@@ -221,7 +222,7 @@ namespace RestAPI.ProjectsAndTeams
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
 

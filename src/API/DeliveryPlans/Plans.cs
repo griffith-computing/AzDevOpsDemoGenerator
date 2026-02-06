@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using AzDoCoreLib;
+using Newtonsoft.Json;
 using RestAPI.Viewmodel.Plans;
 using System.Text;
 using static RestAPI.Viewmodel.Plans.DeliveryPlans;
@@ -36,7 +37,7 @@ namespace RestAPI.DeliveryPlans
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -65,7 +66,7 @@ namespace RestAPI.DeliveryPlans
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return false;
                     }
@@ -96,7 +97,7 @@ namespace RestAPI.DeliveryPlans
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -124,7 +125,7 @@ namespace RestAPI.DeliveryPlans
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }

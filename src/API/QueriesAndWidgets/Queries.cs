@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RestAPI.Viewmodel.Extractor;
@@ -46,7 +47,7 @@ namespace RestAPI.QueriesAndWidgets
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return dashBoardId;
                     }
@@ -97,7 +98,7 @@ namespace RestAPI.QueriesAndWidgets
                             else
                             {
                                 var errorMessage = response.Content.ReadAsStringAsync();
-                                string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                                string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                                 this.LastFailureMessage = error;
                                 return new QueryResponse();
                             }
@@ -259,7 +260,7 @@ namespace RestAPI.QueriesAndWidgets
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return string.Empty;
                     }
@@ -290,7 +291,7 @@ namespace RestAPI.QueriesAndWidgets
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                         return new GetQueries.Queries();
                     }

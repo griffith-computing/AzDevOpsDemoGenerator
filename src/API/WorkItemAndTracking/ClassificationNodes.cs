@@ -1,4 +1,6 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using AzDoTeamsLib;
+using log4net;
 using Newtonsoft.Json;
 using RestAPI.ProjectsAndTeams;
 using RestAPI.Viewmodel.Sprint;
@@ -282,7 +284,7 @@ namespace RestAPI.WorkItemAndTracking
                         viewModel.Message = msg.ToString();
 
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
 

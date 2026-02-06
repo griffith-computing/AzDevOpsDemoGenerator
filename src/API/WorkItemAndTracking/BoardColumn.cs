@@ -1,6 +1,7 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using AzDoTeamsLib.ViewModel;
+using log4net;
 using Newtonsoft.Json;
-using RestAPI.Viewmodel.ProjectAndTeams;
 using RestAPI.Viewmodel.WorkItem;
 using System.Net.Http.Json;
 using System.Text;
@@ -77,7 +78,7 @@ namespace RestAPI.WorkItemAndTracking
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return false;
                     }
@@ -117,7 +118,7 @@ namespace RestAPI.WorkItemAndTracking
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return new GetBoardColumnResponse.ColumnResponse();
                     }
@@ -147,7 +148,7 @@ namespace RestAPI.WorkItemAndTracking
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return new GetBoardColumnResponseAgile.ColumnResponse();
                     }
@@ -160,7 +161,7 @@ namespace RestAPI.WorkItemAndTracking
             return new GetBoardColumnResponseAgile.ColumnResponse();
         }
 
-        public void IncludeSubAreas(string json, RestAPI.ADOConfiguration _projectConfig, TeamResponse teamRes)
+        public void IncludeSubAreas(string json, ADOConfiguration _projectConfig, TeamResponse teamRes)
         {
             try
             {
@@ -179,7 +180,7 @@ namespace RestAPI.WorkItemAndTracking
                     else
                     {
                         var errorMessage = res.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }

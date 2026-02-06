@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using System.Text;
 
 namespace RestAPI.WorkItemAndTracking
@@ -32,7 +33,7 @@ namespace RestAPI.WorkItemAndTracking
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t Update Swimlanes \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return false;
                     }

@@ -1,5 +1,5 @@
 ﻿
-namespace RestAPI
+namespace AzDoCoreLib
 {
     public interface IADOConfiguration
     {

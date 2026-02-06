@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using AzDoCoreLib;
+using System.Text;
 
 namespace RestAPI.DeploymentGRoup
 {
@@ -25,7 +26,7 @@ namespace RestAPI.DeploymentGRoup
                 else
                 {
                     var errorMessage = response.Content.ReadAsStringAsync();
-                    string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                    string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                     this.LastFailureMessage = error;
                     return false;
                 }

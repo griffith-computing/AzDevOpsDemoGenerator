@@ -1,5 +1,6 @@
-﻿using log4net;
-using RestAPI.Viewmodel.ProjectAndTeams;
+﻿using AzDoCoreLib;
+using AzDoTeamsLib.ViewModel;
+using log4net;
 using System.Net.Http.Json;
 
 namespace RestAPI.ProjectsAndTeams

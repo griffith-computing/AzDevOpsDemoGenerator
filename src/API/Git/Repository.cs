@@ -1,4 +1,5 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using log4net;
 using Newtonsoft.Json.Linq;
 using RestAPI.Viewmodel.Repository;
 using System.Net.Http.Json;
@@ -36,7 +37,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = string.IsNullOrEmpty(error) ? $"Unable to import repository - {response.StatusCode} - {response.ReasonPhrase}" : error;
                     }
                 }
@@ -74,7 +75,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
@@ -116,7 +117,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -148,7 +149,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -195,7 +196,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -267,7 +268,7 @@ namespace RestAPI.Git
                         else
                         {
                             var errorMessage = response.Content.ReadAsStringAsync();
-                            string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                            string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                             this.LastFailureMessage = error;
                             return pullRequest;
                         }
@@ -310,7 +311,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                         return string.Empty;
                     }
@@ -350,7 +351,7 @@ namespace RestAPI.Git
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }

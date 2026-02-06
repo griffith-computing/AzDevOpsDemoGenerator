@@ -1,11 +1,12 @@
-﻿using log4net;
+﻿using AzDoCoreLib;
+using AzDoTeamsLib.ViewModel;
+using log4net;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using RestAPI.Viewmodel.ProjectAndTeams;
 using System.Net.Http.Json;
 using System.Text;
 
-namespace RestAPI.ProjectsAndTeams
+namespace AzDoTeamsLib
 {
     public class Teams : ApiServiceBase
     {
@@ -41,7 +42,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t CreateNewTeam \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
@@ -77,7 +78,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t GetTeamMembers \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -122,7 +123,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t CreateArea \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -161,7 +162,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t SetAreaForTeams \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -231,7 +232,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t SetBackLogIterationForTeam \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
@@ -305,7 +306,7 @@ namespace RestAPI.ProjectsAndTeams
                     else
                     {
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -341,7 +342,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t GetTeamByName \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         this.LastFailureMessage = error;
                     }
                 }
@@ -378,7 +379,7 @@ namespace RestAPI.ProjectsAndTeams
                     {
                         logger.Debug(DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss") + "\t GetTeamByName \t" + response.Content.ReadAsStringAsync().Result);
                         var errorMessage = response.Content.ReadAsStringAsync();
-                        string error = Utility.GeterroMessage(errorMessage.Result.ToString());
+                        string error = AzDoCoreLib.Utility.GetErrorMessage(errorMessage.Result.ToString());
                         LastFailureMessage = error;
                     }
                 }
