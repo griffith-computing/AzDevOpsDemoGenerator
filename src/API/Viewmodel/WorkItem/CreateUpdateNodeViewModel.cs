@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.WorkItem
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.WorkItem
 {
     public class CreateUpdateNodeViewModel
     {

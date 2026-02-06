@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.Repository
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.Repository
 {
     public class GetAllRepositoriesResponse
     {

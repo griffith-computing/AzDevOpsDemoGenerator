@@ -1,5 +1,5 @@
-﻿using ADOGenerator.Models;
-using AzDoCoreLib;
+﻿using AzDoCoreLib;
+using AzDoModelsLib.Models;
 using RestAPI;
 using System;
 using System.Collections.Generic;

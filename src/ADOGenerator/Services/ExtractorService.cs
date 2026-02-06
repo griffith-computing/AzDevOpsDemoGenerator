@@ -1,5 +1,4 @@
 ﻿using ADOGenerator.IServices;
-using ADOGenerator.Models;
 using log4net;
 using Newtonsoft.Json.Linq;
 using Newtonsoft.Json;
@@ -22,9 +21,10 @@ using static RestAPI.Viewmodel.Plans.DeliveryPlans;
 using Configuration = AzDoCoreLib.ADOConfiguration;
 using RestAPI.QueriesAndWidgets;
 using Microsoft.Extensions.Configuration;
-using static ADOGenerator.Models.TemplateSelection;
 using AzDoCoreLib;
 using AzDoTeamsLib.ViewModel;
+using AzDoModelsLib.Models;
+using AzDoProjectLib;
 //using ADOProjectConfigurations = ADOGenerator.Models.ADOProjectConfigurations;
 
 namespace ADOGenerator.Services

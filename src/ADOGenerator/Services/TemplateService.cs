@@ -1,5 +1,4 @@
 ﻿using ADOGenerator.IServices;
-using ADOGenerator.Models;
 using ADOGenerator.Services;
 using Microsoft.Extensions.Configuration;
 using RestAPI.Extractor;
@@ -7,6 +6,8 @@ using AzDoTeamsLib;
 using RestAPI;
 using ADOGenerator;
 using AzDoCoreLib;
+using AzDoModelsLib.Models;
+using AzDoProjectLib;
 
 public class TemplateService : ITemplateService
 {

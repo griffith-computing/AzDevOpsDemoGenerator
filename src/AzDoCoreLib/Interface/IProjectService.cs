@@ -1,5 +1,4 @@
-﻿using ADOGenerator.Models;
-using Newtonsoft.Json.Linq;
+﻿using AzDoModelsLib.Models;
 
 namespace ADOGenerator.IServices
 {

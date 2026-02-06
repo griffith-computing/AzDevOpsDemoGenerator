@@ -4,7 +4,7 @@ using System.Net.Mail;
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 
-namespace ADOGenerator.Models
+namespace AzDoModelsLib.Models
 {
     public class Email
     {
@@ -14,7 +14,7 @@ namespace ADOGenerator.Models
 
         public bool SendEmail(string toEmail, string body, string subject)
         {
-            MailMessage newmsg = new MailMessage(ConfigurationManager.AppSettings["from"], toEmail)
+            /*MailMessage newmsg = new MailMessage(ConfigurationManager.AppSettings["from"], toEmail)
             {
                 //newmsg.From = new MailAddress(ConfigurationManager.AppSettings["from"]);
                 IsBodyHtml = true,
@@ -45,7 +45,8 @@ namespace ADOGenerator.Models
             catch (Exception)
             {
                 return false;
-            }
+            }*/
+
             return true;
         }
     }

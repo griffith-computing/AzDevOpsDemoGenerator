@@ -1,6 +1,9 @@
 using ADOGenerator.IServices;
-using ADOGenerator.Models;
 using AzDoCoreLib;
+using AzDoInitLib;
+using AzDoModelsLib.Models;
+using AzDoProjectLib;
+using AzDoProjectLib.Viewmodel.Extractor;
 using AzDoTeamsLib;
 using AzDoTeamsLib.ViewModel;
 using Microsoft.Extensions.Configuration;
@@ -34,7 +37,7 @@ using RestAPI.Wiki;
 using RestAPI.WorkItemAndTracking;
 using System.Diagnostics;
 
-namespace ADOGenerator.Services
+namespace AzDoProjectLib.Service
 {
     public class ProjectService : IProjectService
     {
@@ -789,7 +792,7 @@ namespace ADOGenerator.Services
             model.ReleaseDefinitions = new List<ReleaseDef>();
             if (Directory.Exists(releaseDefinitionsPath))
             {
-                Directory.GetFiles(releaseDefinitionsPath, "*.json", SearchOption.AllDirectories).ToList().ForEach(i => model.ReleaseDefinitions.Add(new Models.ReleaseDef() { FilePath = i }));
+                Directory.GetFiles(releaseDefinitionsPath, "*.json", SearchOption.AllDirectories).ToList().ForEach(i => model.ReleaseDefinitions.Add(new AzDoModelsLib.Models.ReleaseDef() { FilePath = i }));
             }
             bool isReleased = CreateReleaseDefinition(model, _releaseVersion, model.id, teamMembers);
             if (isReleased)

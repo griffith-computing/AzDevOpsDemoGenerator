@@ -1,4 +1,4 @@
-﻿namespace RestAPI.Viewmodel.Extractor
+﻿namespace AzDoProjectLib.Viewmodel.Extractor
 {
     public class ProjectSetting
     {

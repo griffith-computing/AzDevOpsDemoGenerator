@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.2.11415.280 d18.0
+VisualStudioVersion = 18.2.11415.280
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ADOGenerator", "ADOGenerator\ADOGenerator.csproj", "{2B9CBA33-D24A-4E5C-A8F2-FE22E99932E2}"
 EndProject
@@ -10,6 +10,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzDoTeamsLib", "AzDoTeamsLib\AzDoTeamsLib.csproj", "{5D0B1101-EF20-4E4F-B4D4-64217891BA01}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzDoCoreLib", "AzDoCoreLib\AzDoCoreLib.csproj", "{160BC12B-EBCE-45AE-AB6F-EC0303B0F23A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzDoProjectLib", "AzDoProjectLib\AzDoProjectLib.csproj", "{BED4A747-0536-4A51-B598-A23DA9A81FBB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzDoModelsLib", "AzDoModelsLib\AzDoModelsLib.csproj", "{651FBF70-223F-E9A5-8A0B-66A76AE8540B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzDoInitLib", "AzDoInitLib\AzDoInitLib.csproj", "{49F82DFF-8FA5-43BC-9F82-4DBB8897B9C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +39,18 @@ Global
 		{160BC12B-EBCE-45AE-AB6F-EC0303B0F23A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{160BC12B-EBCE-45AE-AB6F-EC0303B0F23A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{160BC12B-EBCE-45AE-AB6F-EC0303B0F23A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BED4A747-0536-4A51-B598-A23DA9A81FBB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BED4A747-0536-4A51-B598-A23DA9A81FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BED4A747-0536-4A51-B598-A23DA9A81FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BED4A747-0536-4A51-B598-A23DA9A81FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{651FBF70-223F-E9A5-8A0B-66A76AE8540B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{651FBF70-223F-E9A5-8A0B-66A76AE8540B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{651FBF70-223F-E9A5-8A0B-66A76AE8540B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{651FBF70-223F-E9A5-8A0B-66A76AE8540B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{49F82DFF-8FA5-43BC-9F82-4DBB8897B9C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{49F82DFF-8FA5-43BC-9F82-4DBB8897B9C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{49F82DFF-8FA5-43BC-9F82-4DBB8897B9C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{49F82DFF-8FA5-43BC-9F82-4DBB8897B9C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
