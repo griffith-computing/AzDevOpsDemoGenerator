@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.Queue
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.Queue
 {
     public class QueueModel : BaseViewModel
     {

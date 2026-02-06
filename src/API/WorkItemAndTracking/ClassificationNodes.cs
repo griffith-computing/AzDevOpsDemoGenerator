@@ -2,7 +2,6 @@
 using AzDoTeamsLib;
 using log4net;
 using Newtonsoft.Json;
-using RestAPI.ProjectsAndTeams;
 using RestAPI.Viewmodel.Sprint;
 using RestAPI.Viewmodel.WorkItem;
 using System.Net.Http.Json;

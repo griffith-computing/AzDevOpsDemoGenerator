@@ -1,6 +1,7 @@
-﻿using ADOGenerator.Models;
+﻿
+using AzDoModelsLib.Models;
 
-namespace ADOGenerator
+namespace AzDoCoreLib
 {
     public static class ServiceExtensions
     {

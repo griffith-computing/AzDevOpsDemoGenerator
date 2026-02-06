@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.QueriesAndWidgets
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.QueriesAndWidgets
 {
     public class DashboardResponse
     {

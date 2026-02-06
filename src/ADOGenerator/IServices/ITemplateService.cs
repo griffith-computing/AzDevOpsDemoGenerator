@@ -1,4 +1,4 @@
-﻿using ADOGenerator.Models;
+﻿using AzDoModelsLib.Models;
 
 namespace ADOGenerator.IServices
 {

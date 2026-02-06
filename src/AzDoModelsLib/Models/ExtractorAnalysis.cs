@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ADOGenerator.Models
+namespace AzDoModelsLib.Models
 {
-    internal class ExtractorAnalysis
+    public class ExtractorAnalysis
     {
         public int teamCount { get; set; }
         public int IterationCount { get; set; }

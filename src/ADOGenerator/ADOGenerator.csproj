@@ -9,7 +9,6 @@
 
 	<ItemGroup>
 		<Compile Remove="IServices\IConfiguration.cs" />
-		<Compile Remove="Models\Configuration.cs" />
 	</ItemGroup>
 	<ItemGroup>
 		<!-- Include the files you want to copy -->
@@ -64,14 +63,14 @@
 	</ItemGroup>
 	<ItemGroup>
 
-		<PackageReference Include="Microsoft.Identity.Client" Version="4.66.2" />
+		<PackageReference Include="Microsoft.Identity.Client" Version="4.82.1" />
 
-		<PackageReference Include="Microsoft.Extensions.Configuration" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="9.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="9.0.0" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="10.0.2" />
+		<PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="10.0.2" />
 
-		<PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.1" />
-		<PackageReference Include="Microsoft.VisualStudio.Services.ExtensionManagement.WebApi" Version="19.225.1" />
+		<PackageReference Include="Microsoft.VisualStudio.Services.Client" Version="19.225.2" />
+		<PackageReference Include="Microsoft.VisualStudio.Services.ExtensionManagement.WebApi" Version="19.225.2" />
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.4" />
 		<PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
 		<PackageReference Include="System.Formats.Asn1" Version="9.0.0" />
@@ -81,6 +80,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\API\API.csproj" />
 	  <ProjectReference Include="..\AzDoCoreLib\AzDoCoreLib.csproj" />
+	  <ProjectReference Include="..\AzDoProjectLib\AzDoProjectLib.csproj" />
 	  <ProjectReference Include="..\AzDoTeamsLib\AzDoTeamsLib.csproj" />
 	</ItemGroup>
 

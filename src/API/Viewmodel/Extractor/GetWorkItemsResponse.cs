@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.Extractor
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.Extractor
 {
     public class GetWorkItemsResponse
     {

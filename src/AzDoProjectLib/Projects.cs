@@ -10,7 +10,7 @@ using System.Text;
 
 
 
-namespace RestAPI.ProjectsAndTeams
+namespace AzDoProjectLib
 {
     public class Projects : ApiServiceBase
     {

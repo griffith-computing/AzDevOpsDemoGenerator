@@ -1,4 +1,4 @@
-﻿namespace ADOGenerator.Models
+﻿namespace AzDoModelsLib.Models
 {
     public class ReadUser
     {

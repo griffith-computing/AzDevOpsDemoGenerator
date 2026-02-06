@@ -1,4 +1,6 @@
-﻿namespace RestAPI.Viewmodel.Builds
+﻿using AzDoCoreLib;
+
+namespace RestAPI.Viewmodel.Builds
 {
     public class BuildGetListofBuildDefinitionsResponse
     {
