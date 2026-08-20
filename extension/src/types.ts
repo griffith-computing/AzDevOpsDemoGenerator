@@ -43,7 +43,7 @@ export interface SdkContext {
 
 export interface TemplateManifestEntry {
   files: string[]
-  assets: Record<string, string>
+  bundle: string
   capabilities: string[]
   requiredParameters: Array<{
     name: string

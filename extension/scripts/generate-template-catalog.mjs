@@ -1,6 +1,5 @@
 import { createHash } from 'node:crypto'
 import {
-  copyFile,
   mkdir,
   readFile,
   readdir,
@@ -21,6 +20,7 @@ const assetsOutputPath = path.join(extensionRoot, 'public', 'Templates')
 const catalog = JSON.parse(await readFile(sourcePath, 'utf8').then((value) => value.replace(/^\uFEFF/u, '')))
 const errors = []
 const templateManifests = {}
+const templateBundles = {}
 
 function assetName(value, extension = '') {
   const hash = createHash('sha256').update(value).digest('hex')
@@ -96,17 +96,26 @@ if (!Array.isArray(catalog.GroupwiseTemplates)) {
         if (!(await stat(projectTemplate)).isFile()) {
           errors.push(`${template.Name}: ProjectTemplate.json is not a file.`)
         } else {
-          const files = await listFiles(templateRoot)
-          const basePath = assetName(template.TemplateFolder)
-          const assets = Object.fromEntries(
-            files.map((file) => {
-              const extension = path.extname(file)
-              return [file, `${basePath}/${assetName(file, extension)}`]
-            }),
-          )
+          const files = (await listFiles(templateRoot))
+            .filter((file) => path.extname(file).toLocaleLowerCase() === '.json')
+          const bundle = Object.create(null)
+          for (const file of files) {
+            try {
+              const text = await readFile(
+                path.join(templateRoot, ...file.split('/')),
+                'utf8',
+              )
+              bundle[file] = JSON.parse(text.replace(/^\uFEFF/u, ''))
+            } catch (error) {
+              const message = error instanceof Error ? error.message : String(error)
+              errors.push(`${template.Name}: ${file} contains invalid JSON: ${message}`)
+            }
+          }
+          const bundlePath = assetName(template.TemplateFolder, '.json')
+          templateBundles[template.TemplateFolder] = bundle
           templateManifests[template.TemplateFolder] = {
             files,
-            assets,
+            bundle: bundlePath,
             capabilities: inferCapabilities(files),
             requiredParameters: await discoverRequiredParameters(templateRoot, files),
           }
@@ -124,12 +133,13 @@ if (errors.length > 0) {
 
 await mkdir(path.dirname(outputPath), { recursive: true })
 await rm(assetsOutputPath, { recursive: true, force: true })
+await mkdir(assetsOutputPath, { recursive: true })
 for (const [templateFolder, entry] of Object.entries(templateManifests)) {
-  for (const [logicalPath, assetPath] of Object.entries(entry.assets)) {
-    const destination = path.join(assetsOutputPath, ...assetPath.split('/'))
-    await mkdir(path.dirname(destination), { recursive: true })
-    await copyFile(path.join(templatesRoot, templateFolder, ...logicalPath.split('/')), destination)
-  }
+  const destination = path.join(assetsOutputPath, entry.bundle)
+  await writeFile(
+    destination,
+    `${JSON.stringify(templateBundles[templateFolder])}\n`,
+  )
 }
 await writeFile(outputPath, `${JSON.stringify(catalog, null, 2)}\n`)
 await writeFile(manifestOutputPath, `${JSON.stringify(templateManifests, null, 2)}\n`)
