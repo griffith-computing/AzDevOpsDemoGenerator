@@ -44,8 +44,15 @@ npm run package
 
 1. Validates and generates the 64-template catalog.
 2. Builds the TypeScript/React application into `extension/dist`.
-3. Copies template content to VSIX-safe asset paths.
+3. Bundles the JSON content for each template into one VSIX-safe asset.
 4. Creates the private VSIX under `extension/packages`.
+5. Verifies that the package contains exactly 64 template bundles and no more
+   than 900 files.
+
+Azure DevOps rejects extensions containing more than 1,000 files or assets.
+Bundling keeps the package safely below that platform limit while loading only
+the selected template in the browser. Source images and other binary template
+files are omitted because extension provisioning consumes JSON only.
 
 Inspect the artifact:
 
@@ -335,6 +342,7 @@ The Marketplace manifest is cached separately from local content. Republish the 
 | Symptom | Check |
 | --- | --- |
 | Marketplace rejects the VSIX | Confirm `publisher` matches the selected publisher and `version` is new. Rebuild after every manifest edit. |
+| Marketplace reports more than 1,000 files or assets | Run `npm run package` from `extension`. The package guard reports the exact file and template-bundle counts and fails above the 900-file safety limit. Do not add individual files under `extension/public/Templates`; update the bundle generator instead. |
 | Extension is not in **Shared** | Recheck the exact organization name in **Share/Unshare** and the signed-in tenant/account. |
 | Installation is denied | Use an Organization Owner or delegated extension administrator and review extension-management permissions. |
 | **Template projects** is missing | Confirm installation completed, refresh Azure DevOps, and look under Organization settings rather than inside a project. |

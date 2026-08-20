@@ -23,7 +23,7 @@
           {
             "rank": 1,
             "isAutomated": true,
-            "isNotificationOn": false,
+            "isNotificationOn": false
           }
         ],
         "approvalOptions": {

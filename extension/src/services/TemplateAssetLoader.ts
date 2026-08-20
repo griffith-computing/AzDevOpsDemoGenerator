@@ -15,6 +15,7 @@ export function getTemplateManifest(
 
 export class TemplateAssetLoader {
   private readonly templateFolder: string
+  private bundlePromise?: Promise<Record<string, unknown>>
 
   constructor(templateFolder: string) {
     this.templateFolder = templateFolder
@@ -43,20 +44,33 @@ export class TemplateAssetLoader {
       )
     }
 
-    const assetPath = this.entry.assets[normalizedPath]
-    if (!assetPath) {
+    const bundle = await this.loadBundle()
+    if (!Object.hasOwn(bundle, normalizedPath)) {
       throw new Error(
-        `Template asset mapping ${this.templateFolder}/${normalizedPath} is missing.`,
+        `Template bundle entry ${this.templateFolder}/${normalizedPath} is missing.`,
       )
     }
 
-    const response = await fetch(`./Templates/${assetPath}`)
+    return structuredClone(bundle[normalizedPath]) as T
+  }
+
+  private loadBundle(): Promise<Record<string, unknown>> {
+    this.bundlePromise ??= this.fetchBundle()
+    return this.bundlePromise
+  }
+
+  private async fetchBundle(): Promise<Record<string, unknown>> {
+    if (!this.entry.bundle) {
+      throw new Error(`Template bundle mapping ${this.templateFolder} is missing.`)
+    }
+
+    const response = await fetch(`./Templates/${this.entry.bundle}`)
     if (!response.ok) {
       throw new Error(
-        `Template asset ${this.templateFolder}/${normalizedPath} could not be loaded.`,
+        `Template bundle ${this.templateFolder} could not be loaded.`,
       )
     }
-    return (await response.json()) as T
+    return (await response.json()) as Record<string, unknown>
   }
 }
 
