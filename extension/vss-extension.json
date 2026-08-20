@@ -1,13 +1,13 @@
 {
   "manifestVersion": 1,
   "id": "template-projects",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "name": "Template Projects",
   "description": "Create proof-of-concept Azure DevOps projects from bundled templates.",
   "publisher": "Stephen-Griffith",
   "public": false,
   "icons": {
-    "default": "dist/favicon.svg"
+    "default": "dist/favicon.png"
   },
   "categories": [
     "Azure Boards"
