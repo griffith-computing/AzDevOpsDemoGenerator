@@ -1,0 +1,36 @@
+{
+  "name": "azure-devops-template-projects-extension",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "generate:catalog": "node scripts/generate-template-catalog.mjs",
+    "predev": "npm run generate:catalog",
+    "dev": "vite",
+    "prebuild": "npm run generate:catalog",
+    "build": "tsc -b && vite build",
+    "lint": "oxlint",
+    "preview": "vite preview",
+    "pretest": "npm run generate:catalog",
+    "test": "vitest run",
+    "package": "npm run build && tfx extension create --manifest-globs vss-extension.json --root . --output-path packages"
+  },
+  "dependencies": {
+    "azure-devops-extension-api": "^5.276.0",
+    "azure-devops-extension-sdk": "^4.0.2",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {
+    "@types/node": "^24.13.3",
+    "@types/react": "^19.2.17",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.4",
+    "oxlint": "^1.75.0",
+    "tfx-cli": "^0.23.5",
+    "typescript": "~6.0.2",
+    "vite": "^8.2.0",
+    "vitest": "^4.1.0"
+  }
+}

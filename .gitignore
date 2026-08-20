@@ -152,3 +152,9 @@ UpgradeLog.htm
 /src/AzureDevOpsDemoBuilder/Appsettings.Development.json
 /src/AzureDevOpsDemoBuilder/appsettings.json
 /src/ADOGenerator/ExtractedTemplate
+
+# Azure DevOps extension
+/extension/node_modules/
+/extension/dist/
+/extension/packages/
+/extension/public/Templates/

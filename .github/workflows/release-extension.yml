@@ -1,0 +1,146 @@
+name: Release Azure DevOps Extension
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: extension-release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: extension/package-lock.json
+
+      - name: Validate tag, branch, and versions
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if [[ ! "$RELEASE_TAG" =~ ^v(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)\.(0|[1-9][0-9]*)$ ]]; then
+            echo "::error::Release tag must use strict vMAJOR.MINOR.PATCH syntax."
+            exit 1
+          fi
+
+          git fetch origin main:refs/remotes/origin/main --no-tags
+          tagged_commit="$(git rev-list -n 1 "$RELEASE_TAG")"
+          if ! git merge-base --is-ancestor "$tagged_commit" origin/main; then
+            echo "::error::The tagged commit must be reachable from origin/main."
+            exit 1
+          fi
+
+          node --input-type=module <<'NODE'
+          import { readFileSync } from "node:fs";
+
+          const expected = process.env.RELEASE_TAG.slice(1);
+          const readJson = (path) => JSON.parse(readFileSync(path, "utf8"));
+          const versions = new Map([
+            ["extension/vss-extension.json", readJson("extension/vss-extension.json").version],
+            ["extension/package.json", readJson("extension/package.json").version],
+            [
+              "extension/package-lock.json",
+              readJson("extension/package-lock.json").packages[""].version,
+            ],
+          ]);
+
+          const mismatches = [...versions].filter(([, version]) => version !== expected);
+          if (mismatches.length > 0) {
+            for (const [path, version] of mismatches) {
+              console.error(`::error file=${path}::Expected version ${expected}, found ${version}.`);
+            }
+            process.exit(1);
+          }
+
+          console.log(`Validated release version ${expected}.`);
+          NODE
+
+      - name: Install dependencies
+        working-directory: extension
+        run: npm ci
+
+      - name: Lint
+        working-directory: extension
+        run: npm run lint
+
+      - name: Test
+        working-directory: extension
+        run: npm test
+
+      - name: Package VSIX
+        working-directory: extension
+        run: npm run package
+
+      - name: Create checksum
+        id: artifacts
+        working-directory: extension
+        shell: bash
+        run: |
+          set -euo pipefail
+          shopt -s nullglob
+          packages=(packages/*.vsix)
+
+          if [[ ${#packages[@]} -ne 1 ]]; then
+            echo "::error::Expected exactly one VSIX in extension/packages, found ${#packages[@]}."
+            exit 1
+          fi
+
+          vsix="${packages[0]}"
+          filename="$(basename "$vsix")"
+          (
+            cd packages
+            sha256sum "$filename" > "$filename.sha256"
+          )
+
+          echo "vsix_path=extension/$vsix" >> "$GITHUB_OUTPUT"
+          echo "checksum_path=extension/$vsix.sha256" >> "$GITHUB_OUTPUT"
+
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: azure-devops-template-projects-${{ github.ref_name }}
+          path: |
+            ${{ steps.artifacts.outputs.vsix_path }}
+            ${{ steps.artifacts.outputs.checksum_path }}
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Create GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ github.ref_name }}
+          VSIX_PATH: ${{ steps.artifacts.outputs.vsix_path }}
+          CHECKSUM_PATH: ${{ steps.artifacts.outputs.checksum_path }}
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          if gh release view "$RELEASE_TAG" --repo "$GITHUB_REPOSITORY" >/dev/null 2>&1; then
+            echo "::error::GitHub Release $RELEASE_TAG already exists."
+            exit 1
+          fi
+
+          gh release create "$RELEASE_TAG" \
+            "$VSIX_PATH" \
+            "$CHECKSUM_PATH" \
+            --repo "$GITHUB_REPOSITORY" \
+            --verify-tag \
+            --generate-notes \
+            --title "Template Projects $RELEASE_TAG"
