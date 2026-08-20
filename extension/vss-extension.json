@@ -1,10 +1,10 @@
 {
   "manifestVersion": 1,
   "id": "template-projects",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "name": "Template Projects",
   "description": "Create proof-of-concept Azure DevOps projects from bundled templates.",
-  "publisher": "griffith-computing",
+  "publisher": Stephen-Grifith",
   "public": false,
   "icons": {
     "default": "dist/favicon.svg"
