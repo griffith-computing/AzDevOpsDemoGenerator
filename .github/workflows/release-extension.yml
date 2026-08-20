@@ -57,6 +57,10 @@ jobs:
             ["extension/package.json", readJson("extension/package.json").version],
             [
               "extension/package-lock.json",
+              readJson("extension/package-lock.json").version,
+            ],
+            [
+              "extension/package-lock.json root package",
               readJson("extension/package-lock.json").packages[""].version,
             ],
           ]);

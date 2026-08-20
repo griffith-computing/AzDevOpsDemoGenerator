@@ -108,13 +108,37 @@ Commit these version changes through the normal pull-request process and merge t
 
 ### Tag the merged commit
 
-Update local `main`, create an annotated tag, and push it:
+Update local `main` and confirm that all three committed version values match the intended tag:
 
 ```powershell
 git switch main
 git pull --ff-only origin main
+
+@'
+const fs = require("node:fs")
+const read = path => JSON.parse(fs.readFileSync(path, "utf8"))
+const lock = read("extension/package-lock.json")
+console.log("manifest", read("extension/vss-extension.json").version)
+console.log("package", read("extension/package.json").version)
+console.log("lockfile", lock.version)
+console.log("lock root", lock.packages[""].version)
+'@ | node
+```
+
+All four values must print `0.2.0` before creating `v0.2.0`.
+
+Create an annotated tag and push the tag ref explicitly:
+
+```powershell
 git tag -a v0.2.0 -m "Release v0.2.0"
-git push origin v0.2.0
+git push origin refs/tags/v0.2.0
+```
+
+A successful push reports a new tag. Confirm that GitHub received it:
+
+```powershell
+git ls-remote --exit-code --tags origin refs/tags/v0.2.0
+gh run list --workflow release-extension.yml --limit 5
 ```
 
 The pushed tag starts `.github/workflows/release-extension.yml`. Follow the run under **Actions** > **Release Azure DevOps Extension**.
@@ -138,6 +162,7 @@ The computed hash must match the first value in the checksum file.
 
 | Failure | Resolution |
 | --- | --- |
+| No workflow run appears | Run `git ls-remote --tags origin refs/tags/<tag>`. If it returns nothing, the tag was not pushed to this repository. Push the explicit `refs/tags/<tag>` ref and check the push output. |
 | Tag syntax is rejected | Use exactly `vMAJOR.MINOR.PATCH`, for example `v0.2.0`. Prerelease suffixes are not enabled. |
 | Tagged commit is not on `main` | Merge the release commit, delete the incorrect remote tag, then tag the merged commit. |
 | Version mismatch | Update the manifest, package, and lockfile to the tag version, merge, and create a new tag. Do not move a published release tag. |
