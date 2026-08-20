@@ -54,6 +54,10 @@ Bundling keeps the package safely below that platform limit while loading only
 the selected template in the browser. Source images and other binary template
 files are omitted because extension provisioning consumes JSON only.
 
+Visual Studio Marketplace also requires the extension icon to be a PNG or JPEG
+of at least 128x128 pixels. The package check validates the committed PNG icon
+and rejects SVG files before upload.
+
 Inspect the artifact:
 
 ```powershell
@@ -343,6 +347,7 @@ The Marketplace manifest is cached separately from local content. Republish the 
 | --- | --- |
 | Marketplace rejects the VSIX | Confirm `publisher` matches the selected publisher and `version` is new. Rebuild after every manifest edit. |
 | Marketplace reports more than 1,000 files or assets | Run `npm run package` from `extension`. The package guard reports the exact file and template-bundle counts and fails above the 900-file safety limit. Do not add individual files under `extension/public/Templates`; update the bundle generator instead. |
+| Marketplace rejects an SVG file | Extension package assets must not use SVG. Keep editable SVG sources outside `extension/public`, export the extension icon as a PNG of at least 128x128 pixels, and rerun `npm run package`. |
 | Extension is not in **Shared** | Recheck the exact organization name in **Share/Unshare** and the signed-in tenant/account. |
 | Installation is denied | Use an Organization Owner or delegated extension administrator and review extension-management permissions. |
 | **Template projects** is missing | Confirm installation completed, refresh Azure DevOps, and look under Organization settings rather than inside a project. |

@@ -27,10 +27,38 @@ const bundles = entries.filter((entry) =>
 const templateAssets = entries.filter((entry) =>
   entry.startsWith('dist/Templates/'),
 )
+const svgAssets = entries.filter((entry) => entry.toLocaleLowerCase().endsWith('.svg'))
 
 if (bundles.length !== 64 || templateAssets.length !== bundles.length) {
   throw new Error(
     `Expected exactly 64 bundled template assets, found ${bundles.length} bundles and ${templateAssets.length} total template assets.`,
+  )
+}
+
+if (svgAssets.length > 0) {
+  throw new Error(
+    `VSIX contains unsupported SVG assets: ${svgAssets.join(', ')}.`,
+  )
+}
+
+const iconPath = manifest.icons?.default?.replaceAll('\\', '/').replace(/^\/+/u, '')
+if (!iconPath || !iconPath.toLocaleLowerCase().endsWith('.png')) {
+  throw new Error('The extension manifest icon must reference a PNG file.')
+}
+if (!entries.includes(iconPath)) {
+  throw new Error(`The extension manifest icon ${iconPath} is missing from the VSIX.`)
+}
+
+const icon = await readFile(path.join(extensionRoot, ...iconPath.split('/')))
+const pngSignature = Buffer.from([137, 80, 78, 71, 13, 10, 26, 10])
+if (!icon.subarray(0, pngSignature.length).equals(pngSignature)) {
+  throw new Error(`The extension manifest icon ${iconPath} is not a valid PNG file.`)
+}
+const iconWidth = icon.readUInt32BE(16)
+const iconHeight = icon.readUInt32BE(20)
+if (iconWidth < 128 || iconHeight < 128) {
+  throw new Error(
+    `The extension icon must be at least 128x128 pixels; found ${iconWidth}x${iconHeight}.`,
   )
 }
 
@@ -42,7 +70,7 @@ if (entries.length > safeFileLimit) {
 }
 
 console.log(
-  `Verified VSIX asset count: ${entries.length} files, including ${bundles.length} template bundles.`,
+  `Verified VSIX asset count: ${entries.length} files, including ${bundles.length} template bundles; icon is ${iconWidth}x${iconHeight} PNG.`,
 )
 
 function readZipEntries(buffer) {
