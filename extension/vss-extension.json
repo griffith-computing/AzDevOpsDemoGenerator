@@ -1,0 +1,54 @@
+{
+  "manifestVersion": 1,
+  "id": "template-projects",
+  "version": "0.1.0",
+  "name": "Template Projects",
+  "description": "Create proof-of-concept Azure DevOps projects from bundled templates.",
+  "publisher": "griffith-computing",
+  "public": false,
+  "icons": {
+    "default": "dist/favicon.svg"
+  },
+  "categories": [
+    "Azure Boards"
+  ],
+  "targets": [
+    {
+      "id": "Microsoft.VisualStudio.Services"
+    }
+  ],
+  "scopes": [
+    "vso.profile",
+    "vso.project_manage",
+    "vso.graph",
+    "vso.work_write",
+    "vso.code_manage",
+    "vso.build_execute",
+    "vso.release_manage",
+    "vso.serviceendpoint_manage",
+    "vso.variablegroups_manage",
+    "vso.machinegroup_manage",
+    "vso.test_write",
+    "vso.wiki_write"
+  ],
+  "files": [
+    {
+      "path": "dist",
+      "addressable": true
+    }
+  ],
+  "contributions": [
+    {
+      "id": "template-projects-hub",
+      "type": "ms.vss-web.hub",
+      "targets": [
+        "ms.vss-web.collection-admin-hub-group"
+      ],
+      "properties": {
+        "name": "Template projects",
+        "order": 100,
+        "uri": "dist/index.html"
+      }
+    }
+  ]
+}
