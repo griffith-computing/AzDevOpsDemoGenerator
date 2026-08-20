@@ -4,7 +4,7 @@
   "version": "0.2.3",
   "name": "Template Projects",
   "description": "Create proof-of-concept Azure DevOps projects from bundled templates.",
-  "publisher": Stephen-Grifith",
+  "publisher": Stephen-Griffith",
   "public": false,
   "icons": {
     "default": "dist/favicon.svg"
