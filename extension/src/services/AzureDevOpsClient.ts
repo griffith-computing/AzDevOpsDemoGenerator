@@ -19,6 +19,23 @@ export class AzureDevOpsRequestError extends Error {
   }
 }
 
+export class AzureDevOpsNetworkError extends Error {
+  readonly method: string
+  readonly path: string
+
+  constructor(method: string, path: string, cause: unknown) {
+    const detail = cause instanceof Error ? ` ${cause.message}` : ''
+    super(
+      `Azure DevOps ${method} request to ${path} failed before a response was received. ` +
+        `Verify the extension's approved scopes and network/CORS access.${detail}`,
+      { cause },
+    )
+    this.name = 'AzureDevOpsNetworkError'
+    this.method = method
+    this.path = path
+  }
+}
+
 export class AzureDevOpsClient {
   private readonly organizationName: string
   private readonly context: SdkContext
@@ -34,7 +51,10 @@ export class AzureDevOpsClient {
     signal?: AbortSignal,
     host: AzureDevOpsHost = 'core',
   ): Promise<T> {
-    const response = await fetch(`${this.getBaseUrl(host)}${path}`, {
+    const method = init.method ?? 'GET'
+    let response: Response
+    try {
+      response = await fetch(`${this.getBaseUrl(host)}${path}`, {
       ...init,
       signal,
       headers: {
@@ -43,7 +63,16 @@ export class AzureDevOpsClient {
         ...(init.body ? { 'Content-Type': 'application/json' } : {}),
         ...init.headers,
       },
-    })
+      })
+    } catch (error) {
+      if (
+        signal?.aborted ||
+        (error instanceof DOMException && error.name === 'AbortError')
+      ) {
+        throw error
+      }
+      throw new AzureDevOpsNetworkError(method, path, error)
+    }
 
     if (!response.ok) {
       let detail: AzureDevOpsErrorBody | undefined

@@ -1,7 +1,7 @@
 {
   "manifestVersion": 1,
   "id": "template-projects",
-  "version": "0.2.7",
+  "version": "0.2.8",
   "name": "Template Projects",
   "description": "Create proof-of-concept Azure DevOps projects from bundled templates.",
   "publisher": "Stephen-Griffith",
@@ -29,7 +29,8 @@
     "vso.variablegroups_manage",
     "vso.machinegroup_manage",
     "vso.test_write",
-    "vso.wiki_write"
+    "vso.wiki_write",
+    "vso.dashboards_manage"
   ],
   "files": [
     {

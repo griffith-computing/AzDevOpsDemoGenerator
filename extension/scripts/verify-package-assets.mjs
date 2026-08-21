@@ -18,6 +18,10 @@ if (!packageName) {
   throw new Error(`Expected package ${expectedName} was not generated.`)
 }
 
+if (!manifest.scopes?.includes('vso.dashboards_manage')) {
+  throw new Error('Extension manifest must request vso.dashboards_manage.')
+}
+
 const entries = readZipEntries(
   await readFile(path.join(packagesRoot, packageName)),
 ).filter((entry) => !entry.endsWith('/'))
