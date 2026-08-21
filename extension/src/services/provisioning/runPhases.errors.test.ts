@@ -102,6 +102,9 @@ describe('runPhases error propagation', () => {
       status: 'failed',
       message: 'Azure DevOps rejected the request.',
     })
+    expect(emit).not.toHaveBeenCalledWith(
+      expect.objectContaining({ stepId: 'complete' }),
+    )
   })
 
   it('falls back to a generic failure message for a non-Error throw', async () => {

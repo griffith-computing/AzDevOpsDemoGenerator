@@ -41,4 +41,10 @@ export async function runPhases(
       throw error
     }
   }
+
+  emit({
+    stepId: 'complete',
+    label: 'Template Project Creation Complete',
+    status: 'succeeded',
+  })
 }
