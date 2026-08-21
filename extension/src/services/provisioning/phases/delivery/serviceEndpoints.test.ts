@@ -5,10 +5,18 @@ import type { ProvisioningContext } from '../../types'
 
 interface MockLoaderOptions {
   files: Record<string, unknown>
+  importOnlyServiceEndpoints?: string[]
 }
 
-function mockLoader({ files }: MockLoaderOptions): ProvisioningContext['loader'] {
+function mockLoader({
+  files,
+  importOnlyServiceEndpoints = [],
+}: MockLoaderOptions): ProvisioningContext['loader'] {
   return {
+    entry: {
+      importOnlyServiceEndpoints,
+      anonymousImportFiles: [],
+    },
     filesUnder: (directory: string) =>
       Object.keys(files).filter((file) => file.startsWith(`${directory}/`)),
     json: async (path: string) => files[path],
@@ -115,6 +123,7 @@ describe('serviceEndpointsPhase.run', () => {
         },
       },
     })
+
     const request = vi.fn()
     const client = { request } as unknown as ProvisioningContext['client']
 
@@ -123,6 +132,31 @@ describe('serviceEndpointsPhase.run', () => {
     await expect(serviceEndpointsPhase.run(context)).rejects.toThrow(
       /requires credential\(s\) "Apikey"/u,
     )
+    expect(request).not.toHaveBeenCalled()
+  })
+
+  it('skips a legacy endpoint used only to import a public repository', async () => {
+    const loader = mockLoader({
+      files: {
+        'ServiceEndpoints/Source-code.json': {
+          name: 'Source-code',
+          type: 'git',
+          authorization: {
+            scheme: 'UsernamePassword',
+            parameters: { username: '$username$', password: '$password$' },
+          },
+        },
+      },
+      importOnlyServiceEndpoints: ['Source-code'],
+    })
+    const request = vi.fn()
+    const context = contextWith(
+      loader,
+      { request } as unknown as ProvisioningContext['client'],
+    )
+
+    await serviceEndpointsPhase.run(context)
+
     expect(request).not.toHaveBeenCalled()
   })
 

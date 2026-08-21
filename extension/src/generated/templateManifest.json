@@ -102,15 +102,12 @@
       "TestPlans",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/eShopOnWeb.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "eShopOnWeb-code"
     ]
   },
   "Gen-Tailwind Traders": {
@@ -142,15 +139,14 @@
       "ServiceEndpoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/Documents.json",
+      "ImportSourceCode/TailwindTraders.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Documents-code",
+      "TailwindTraders-code"
     ]
   },
   "Gen-PartsUnlimited": {
@@ -215,15 +211,12 @@
       "TestPlans",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/PartsUnlimited.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "PartsUnlimited-code"
     ]
   },
   "Gen-MyShuttle": {
@@ -279,15 +272,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/MyShuttle.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "MyShuttle-code"
     ]
   },
   "Gen-ContosoAir": {
@@ -329,15 +319,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/ContosoAir-tc.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "ContosoAir-tc-code"
     ]
   },
   "DL-Terraform": {
@@ -359,15 +346,12 @@
       "ReleaseDefinitions",
       "ServiceEndpoints"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/Terraform.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Terraform-code"
     ]
   },
   "DL-Ansible": {
@@ -396,15 +380,12 @@
       "ServiceEndpoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/SmartHotel360-CouponManagement.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Ansible-code"
     ]
   },
   "DL-LaunchDarkly": {
@@ -427,15 +408,12 @@
       "ReleaseDefinitions",
       "ServiceEndpoints"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/LaunchDarkly.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "LaunchDarkly-code"
     ]
   },
   "DL-MachineLearning": {
@@ -457,15 +435,12 @@
       "ReleaseDefinitions",
       "ServiceEndpoints"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/DevOps-for-AI.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "DevOps-for-AI-code"
     ]
   },
   "DL-Keyvault": {
@@ -511,15 +486,13 @@
       {
         "name": "GitUserPassword",
         "secret": true
-      },
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
       }
+    ],
+    "anonymousImportFiles": [
+      "ImportSourceCode/azure-key-vault.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "azure-key-vault-code"
     ]
   },
   "DL-Docker": {
@@ -571,15 +544,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/Docker.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Docker-code"
     ]
   },
   "DL-AKS": {
@@ -632,15 +602,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/AKS.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "AKS-code"
     ]
   },
   "DL-Octopus": {
@@ -700,15 +667,13 @@
       {
         "name": "URL",
         "secret": false
-      },
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
       }
+    ],
+    "anonymousImportFiles": [
+      "ImportSourceCode/Octopus.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Octopus-code"
     ]
   },
   "DL-Selenium": {
@@ -737,15 +702,12 @@
       "ServiceEndpoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/Selenium.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Selenium-code"
     ]
   },
   "DL-DeploymentGroups": {
@@ -795,15 +757,12 @@
       "ServiceEndPoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/DeploymentGroup.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "DeploymentGroup-code"
     ]
   },
   "DL-SonarQube": {
@@ -845,15 +804,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/MyShuttle.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "SonarQube-code"
     ]
   },
   "DL-ReleaseGates": {
@@ -897,15 +853,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/PartsUnlimited.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "PartsUnlimited-code"
     ]
   },
   "DL-PHP": {
@@ -968,15 +921,13 @@
       {
         "name": "GitUserPassword",
         "secret": true
-      },
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
       }
+    ],
+    "anonymousImportFiles": [
+      "ImportSourceCode/PHP.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "php-code"
     ]
   },
   "DL-Python": {
@@ -1022,15 +973,12 @@
       "ServiceEndpoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/PythonDjango.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "Python-code"
     ]
   },
   "DL-WhiteSource-Bolt": {
@@ -1084,15 +1032,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/WebGoat.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "WebGoat-code"
     ]
   },
   "DL-AzureFunctions": {
@@ -1137,15 +1082,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/AzureFunctions.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "AzureFunctions-code"
     ]
   },
   "MSL-Create-Build-Pipeline": {
@@ -1181,6 +1123,12 @@
         "name": "username",
         "secret": false
       }
+    ],
+    "anonymousImportFiles": [
+      "ImportSourceCode/mslearn-tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "mslearn-tailspin-spacegame-web-code"
     ]
   },
   "MSL-Implement-Code-Workflow": {
@@ -1209,15 +1157,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-Run-Quality-Tests": {
@@ -1246,15 +1191,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-Scan-for-Vulnerabilities": {
@@ -1283,15 +1225,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-Scan-Open-Source": {
@@ -1320,15 +1259,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-Manage-Build-Dependencies": {
@@ -1357,15 +1293,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-Host-Build-Agent": {
@@ -1394,15 +1327,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-SpaceGame-web-Release": {
@@ -1429,15 +1359,12 @@
       "ServiceEndpoints",
       "Teams"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-Multi-stage": {
@@ -1466,15 +1393,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-DeployDatabase": {
@@ -1503,15 +1427,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-FunctionalTests": {
@@ -1540,15 +1461,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-Non-functionalTests": {
@@ -1577,15 +1495,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-DeploymentPatterns": {
@@ -1614,15 +1529,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-deploy.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-deploy-code"
     ]
   },
   "MSL-SpaceGame-web-Terraform": {
@@ -1651,15 +1563,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-automate.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-automate-code"
     ]
   },
   "MSL-SpaceGame-web-ProvisionDB": {
@@ -1688,15 +1597,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-automate.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-automate-code"
     ]
   },
   "MSL-SpaceGame-DeliveryPlans": {
@@ -1742,15 +1648,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "GitUserName",
-        "secret": false
-      },
-      {
-        "name": "GitUserPassword",
-        "secret": true
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-code"
     ]
   },
   "MSL-SpaceGame-AzureFunctions": {
@@ -1779,15 +1682,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-azure-functions.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-azure-functions-code"
     ]
   },
   "MSL-Deploy-Docker-Template": {
@@ -1816,15 +1716,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/mslearn-tailspin-spacegame-web-docker.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-docker-code"
     ]
   },
   "MSL-Deploy-Kubernetes-Template": {
@@ -1853,15 +1750,12 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": [
-      {
-        "name": "password",
-        "secret": true
-      },
-      {
-        "name": "username",
-        "secret": false
-      }
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/tailspin-spacegame-web-kubernetes.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "tailspin-spacegame-web-kubernetes-code"
     ]
   },
   "MSL-Test-bicep": {
@@ -1876,7 +1770,11 @@
       "BuildDefinitions",
       "ImportSourceCode"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/toy-website-test.json"
+    ],
+    "importOnlyServiceEndpoints": []
   },
   "MSL-Manage-multiple-environments-azure-pipelines": {
     "files": [
@@ -1894,7 +1792,11 @@
       "ImportSourceCode",
       "Iterations"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/toy-website-environments.json"
+    ],
+    "importOnlyServiceEndpoints": []
   },
   "MSL-manage-end-end-deployment-scenarios": {
     "files": [
@@ -1914,7 +1816,11 @@
       "Iterations",
       "VariableGroups"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/toy-website-end-to-end.json"
+    ],
+    "importOnlyServiceEndpoints": []
   },
   "MSL-Review-azure-infrastructure-changes": {
     "files": [
@@ -1936,7 +1842,11 @@
       "Iterations",
       "Teams"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/toy-website-review.json"
+    ],
+    "importOnlyServiceEndpoints": []
   },
   "MSL-Toy-reusable": {
     "files": [
@@ -1961,7 +1871,11 @@
       "Iterations",
       "Teams"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [
+      "ImportSourceCode/toy-reusable.json"
+    ],
+    "importOnlyServiceEndpoints": []
   },
   "AC-AzureSentinel": {
     "files": [
@@ -1986,7 +1900,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "AC-NIST800171Rev2": {
     "files": [
@@ -2017,7 +1933,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "AC-WVDGuidance": {
     "files": [
@@ -2041,7 +1959,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "AC-SapOnAzure": {
     "files": [
@@ -2075,7 +1995,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-CloudAdoptionPlan": {
     "files": [
@@ -2106,7 +2028,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-ADO-Strategy-Plan-Ready-Governance": {
     "files": [
@@ -2139,7 +2063,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-ServerMigration": {
     "files": [
@@ -2170,7 +2096,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-AKS_CAF": {
     "files": [
@@ -2204,7 +2132,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-SQL_Migration": {
     "files": [
@@ -2236,7 +2166,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-WindowsVirtualDesktop": {
     "files": [
@@ -2274,7 +2206,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-KnowledgeMining": {
     "files": [
@@ -2300,7 +2234,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-AzureGovernance": {
     "files": [
@@ -2331,7 +2267,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-ModernDataWarehouse": {
     "files": [
@@ -2357,7 +2295,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-RetailRecommender-SolutionAccelerator": {
     "files": [
@@ -2383,7 +2323,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-ModernIOT": {
     "files": [
@@ -2409,7 +2351,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-SecureResearch": {
     "files": [
@@ -2435,7 +2379,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-UnifiedDataGovernance": {
     "files": [
@@ -2461,7 +2407,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "CAF-ModernDataAnalytics": {
     "files": [
@@ -2487,7 +2435,9 @@
       "Teams",
       "WorkItems"
     ],
-    "requiredParameters": []
+    "requiredParameters": [],
+    "anonymousImportFiles": [],
+    "importOnlyServiceEndpoints": []
   },
   "FA-IAC-migration": {
     "files": [
@@ -2533,6 +2483,12 @@
         "name": "GitUserPassword",
         "secret": true
       }
+    ],
+    "anonymousImportFiles": [
+      "ImportSourceCode/IaC Migration.json"
+    ],
+    "importOnlyServiceEndpoints": [
+      "GitHub_fafc3091"
     ]
   }
 }

@@ -47,8 +47,21 @@ export class AzureDevOpsClient {
 
     if (!response.ok) {
       let detail: AzureDevOpsErrorBody | undefined
+      let responseMessage: string | undefined
       try {
-        detail = (await response.json()) as AzureDevOpsErrorBody
+        const text = await response.text()
+        if (text.trim()) {
+          try {
+            const parsed = JSON.parse(text) as unknown
+            if (typeof parsed === 'string') {
+              responseMessage = parsed
+            } else if (parsed && typeof parsed === 'object') {
+              detail = parsed as AzureDevOpsErrorBody
+            }
+          } catch {
+            responseMessage = text.trim().slice(0, 2_000)
+          }
+        }
       } catch {
         detail = undefined
       }
@@ -56,6 +69,7 @@ export class AzureDevOpsClient {
       throw new AzureDevOpsRequestError(
         response.status,
         detail?.message ??
+          responseMessage ??
           `Azure DevOps request failed with ${response.status} ${response.statusText}.`,
         detail?.typeKey,
       )

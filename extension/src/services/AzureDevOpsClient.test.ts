@@ -65,4 +65,26 @@ describe('AzureDevOpsClient', () => {
       }),
     )
   })
+
+  it('surfaces a plain-text Azure DevOps error body', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockResolvedValue(
+        new Response('The repository must be empty before importing.', {
+          status: 400,
+        }),
+      ),
+    )
+    const client = new AzureDevOpsClient({
+      organizationName: 'contoso',
+      accessToken: 'token',
+    })
+
+    await expect(client.request('/_apis/git/importRequests')).rejects.toEqual(
+      expect.objectContaining<Partial<AzureDevOpsRequestError>>({
+        status: 400,
+        message: 'The repository must be empty before importing.',
+      }),
+    )
+  })
 })

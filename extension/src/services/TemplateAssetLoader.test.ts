@@ -31,12 +31,18 @@ describe('generated template assets', () => {
     expect(bundles.size).toBe(64)
   })
 
-  it('discovers service connection parameters without embedding their values', () => {
-    const entry = typedManifest['Gen-eShopOnWeb']
+  it('omits credentials for public imports but retains unrelated endpoint parameters', () => {
+    const publicImport = typedManifest['Gen-eShopOnWeb']
+    const externalService = typedManifest['DL-Octopus']
 
-    expect(entry.requiredParameters).toEqual([
-      { name: 'password', secret: true },
-      { name: 'username', secret: false },
+    expect(publicImport.anonymousImportFiles).toEqual([
+      'ImportSourceCode/eShopOnWeb.json',
+    ])
+    expect(publicImport.importOnlyServiceEndpoints).toEqual(['eShopOnWeb-code'])
+    expect(publicImport.requiredParameters).toEqual([])
+    expect(externalService.requiredParameters).toEqual([
+      { name: 'Apikey', secret: true },
+      { name: 'URL', secret: false },
     ])
   })
 })

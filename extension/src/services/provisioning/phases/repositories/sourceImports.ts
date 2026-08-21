@@ -44,10 +44,9 @@ const importPollMaxDelayMs = 8_000
  * phase, polling the resulting Azure DevOps import operation until it
  * completes instead of sleeping a fixed amount of time.
  *
- * GitHub credentials are out of scope for this MVP: a template that imports
- * from a public URL with no `serviceEndpointId` is supported, but one that
- * needs a credentialed service connection (GitHub or otherwise) fails with
- * an actionable error rather than importing nothing silently.
+ * Catalog sources classified as public during generation are imported
+ * anonymously. Private sources still require a credentialed service
+ * connection and fail actionably if the endpoint is unavailable.
  */
 export const sourceImportsPhase: ProvisioningPhase = {
   id: 'source-imports',
@@ -68,7 +67,12 @@ export const sourceImportsPhase: ProvisioningPhase = {
 
       const raw = await loader.json<ImportSourceCodeTemplate>(file)
       const resolved = applyTemplateValues(raw, state)
-      const parameters = resolveImportParameters(resolved.parameters, repositoryName, state)
+      const parameters = resolveImportParameters(
+        resolved.parameters,
+        repositoryName,
+        state,
+        loader.entry.anonymousImportFiles.includes(file),
+      )
 
       const importRequest = await client.request<GitImportRequest>(
         `/${encodeURIComponent(state.projectId)}/_apis/git/repositories/${encodeURIComponent(
@@ -87,7 +91,12 @@ function resolveImportParameters(
   parameters: ImportSourceCodeParametersTemplate,
   repositoryName: string,
   state: ProvisioningState,
+  anonymous: boolean,
 ): GitImportRequestParameters {
+  if (anonymous) {
+    return { gitSource: parameters.gitSource }
+  }
+
   if (!parameters.serviceEndpointId) {
     return { gitSource: parameters.gitSource }
   }

@@ -38,7 +38,9 @@ interface ServiceEndpoint {
  * `ServiceEndpoints`/`ServiceEndPoints` folder (both casings appear across
  * the catalog), populating `context.state.endpointIds` for later phases.
  *
- * Templates encode credentials as `$username$`/`$password$`/`$Apikey$`/
+ * Import-only endpoints for catalog sources known to be public are omitted;
+ * those imports use anonymous access instead. Other templates encode
+ * credentials as `$username$`/`$password$`/`$Apikey$`/
  * `$GitUserName$`/`$GitUserPassword$`/`$URL$`-style placeholders. This tool
  * never fabricates or persists secret values (unlike the legacy desktop
  * tool, which filled them from server-side configuration), so a template
@@ -52,9 +54,13 @@ export const serviceEndpointsPhase: ProvisioningPhase = {
   isApplicable: (context) => serviceEndpointFiles(context.loader).length > 0,
   run: async (context) => {
     const { client, loader, state, signal } = context
+    const skippedEndpoints = new Set(loader.entry.importOnlyServiceEndpoints)
 
     for (const file of serviceEndpointFiles(loader)) {
       const raw = await loader.json<ServiceEndpointTemplate>(file)
+      if (skippedEndpoints.has(raw.name)) {
+        continue
+      }
       const resolved = applyTemplateValues(raw, state)
       assertNoUnresolvedPlaceholders(resolved, `Service endpoint "${resolved.name}"`)
 
