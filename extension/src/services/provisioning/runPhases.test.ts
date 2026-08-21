@@ -45,11 +45,17 @@ describe('runPhases', () => {
     await runPhases(phases, context(), emit)
 
     expect(calls).toEqual(['first', 'second'])
-    expect(emit).toHaveBeenCalledTimes(4)
+    expect(emit).toHaveBeenCalledTimes(5)
+    expect(emit).toHaveBeenLastCalledWith({
+      stepId: 'complete',
+      label: 'Template Project Creation Complete',
+      status: 'succeeded',
+    })
   })
 
-  it('does not execute an inapplicable phase', async () => {
+  it('completes when an inapplicable phase is skipped', async () => {
     const run = vi.fn()
+    const emit = vi.fn()
     await runPhases(
       [
         {
@@ -60,9 +66,14 @@ describe('runPhases', () => {
         },
       ],
       context(),
-      vi.fn(),
+      emit,
     )
 
     expect(run).not.toHaveBeenCalled()
+    expect(emit).toHaveBeenLastCalledWith({
+      stepId: 'complete',
+      label: 'Template Project Creation Complete',
+      status: 'succeeded',
+    })
   })
 })
