@@ -33,7 +33,8 @@ export interface DashboardListEntry {
 
 /** Response returned by the list-dashboards endpoint. */
 export interface DashboardListResponse {
-  dashboardEntries: DashboardListEntry[]
+  count: number
+  value: DashboardListEntry[]
 }
 
 /** Response returned by the create-dashboard endpoint. */

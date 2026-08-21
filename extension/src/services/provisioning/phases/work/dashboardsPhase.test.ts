@@ -38,8 +38,14 @@ function contextWith(
 function dashboardsClient(onCreateReal: (body: Record<string, unknown>) => void) {
   return vi.fn(async (path: string, init: RequestInit = {}) => {
     const method = init.method ?? 'GET'
+    if (path.includes('/_apis/dashboard/dashboards')) {
+      expect(path).toContain('api-version=7.1-preview.3')
+    }
     if (method === 'GET' && path.includes('/_apis/dashboard/dashboards?')) {
-      return { dashboardEntries: [{ id: 'default-id', name: 'Default' }] }
+      return {
+        count: 1,
+        value: [{ id: 'default-id', name: 'Default' }],
+      }
     }
     if (method === 'POST' && path.includes('/_apis/dashboard/dashboards?')) {
       const body = JSON.parse(init.body as string) as Record<string, unknown>
@@ -141,5 +147,9 @@ describe('dashboardsPhase.run', () => {
       /Dashboard "Overview" has unresolved template values: SomeUnknownToken\./u,
     )
     expect(createdReal).toBe(false)
+    const destructiveCalls = vi.mocked(request).mock.calls.filter(
+      ([, init]) => init?.method === 'POST' || init?.method === 'DELETE',
+    )
+    expect(destructiveCalls).toEqual([])
   })
 })

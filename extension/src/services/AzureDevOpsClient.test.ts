@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest'
 import {
   AzureDevOpsClient,
+  AzureDevOpsNetworkError,
   AzureDevOpsRequestError,
 } from './AzureDevOpsClient'
 
@@ -84,6 +85,31 @@ describe('AzureDevOpsClient', () => {
       expect.objectContaining<Partial<AzureDevOpsRequestError>>({
         status: 400,
         message: 'The repository must be empty before importing.',
+      }),
+    )
+  })
+
+  it('adds request context to browser-level fetch failures', async () => {
+    vi.stubGlobal(
+      'fetch',
+      vi.fn().mockRejectedValue(new TypeError('Failed to fetch')),
+    )
+    const client = new AzureDevOpsClient({
+      organizationName: 'contoso',
+      accessToken: 'token',
+    })
+
+    await expect(
+      client.request('/project/team/_apis/dashboard/dashboards', {
+        method: 'POST',
+      }),
+    ).rejects.toEqual(
+      expect.objectContaining<Partial<AzureDevOpsNetworkError>>({
+        method: 'POST',
+        path: '/project/team/_apis/dashboard/dashboards',
+        message:
+          'Azure DevOps POST request to /project/team/_apis/dashboard/dashboards failed before a response was received. ' +
+          "Verify the extension's approved scopes and network/CORS access. Failed to fetch",
       }),
     )
   })

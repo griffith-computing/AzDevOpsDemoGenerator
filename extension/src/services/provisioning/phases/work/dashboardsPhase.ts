@@ -13,6 +13,7 @@ import { substituteTokens } from './tokens'
 
 const temporaryDashboardName = 'Working'
 const temporaryDashboardPosition = 4
+const dashboardApiVersion = '7.1-preview.3'
 const unresolvedTokenPattern = /\$([^$]+)\$/gu
 
 const queryAliases: Record<string, string[]> = {
@@ -48,11 +49,11 @@ async function getDefaultDashboardId(
 ): Promise<string> {
   const { client, state, signal } = context
   const response = await client.request<DashboardListResponse>(
-    `${dashboardsBasePath(state.projectId, teamName)}?api-version=7.1`,
+    `${dashboardsBasePath(state.projectId, teamName)}?api-version=${dashboardApiVersion}`,
     {},
     signal,
   )
-  const entry = response.dashboardEntries[0]
+  const entry = response.value[0]
   if (!entry) {
     throw new Error(`Team "${teamName}" has no default dashboard to replace.`)
   }
@@ -186,26 +187,6 @@ async function provisionDashboard(
 
   const teamName = group.teamName ?? state.defaultTeamName
 
-  const defaultDashboardId = await getDefaultDashboardId(context, teamName)
-
-  const temporaryBody: TemporaryDashboardBody = {
-    name: temporaryDashboardName,
-    position: temporaryDashboardPosition,
-  }
-  const temporaryDashboard = await client.request<DashboardCreateResponse>(
-    `${dashboardsBasePath(state.projectId, teamName)}?api-version=7.1`,
-    { method: 'POST', body: JSON.stringify(temporaryBody) },
-    signal,
-  )
-
-  await client.request<void>(
-    `${dashboardsBasePath(state.projectId, teamName)}/${encodeURIComponent(
-      defaultDashboardId,
-    )}?api-version=7.1`,
-    { method: 'DELETE' },
-    signal,
-  )
-
   const rawDashboard = await loader.json<DashboardTemplate>(dashboardAsset)
   // `$projectId$`/`$ProjectId$` etc. mean the real project GUID here (unlike
   // the query-specific `$projectId$`-means-name override in
@@ -231,8 +212,27 @@ async function provisionDashboard(
   const dashboard = substituteTokens(dashboardAfterDefaults, tokenValues)
   assertNoDashboardTokens(dashboard)
 
+  const defaultDashboardId = await getDefaultDashboardId(context, teamName)
+  const temporaryBody: TemporaryDashboardBody = {
+    name: temporaryDashboardName,
+    position: temporaryDashboardPosition,
+  }
+  const temporaryDashboard = await client.request<DashboardCreateResponse>(
+    `${dashboardsBasePath(state.projectId, teamName)}?api-version=${dashboardApiVersion}`,
+    { method: 'POST', body: JSON.stringify(temporaryBody) },
+    signal,
+  )
+
+  await client.request<void>(
+    `${dashboardsBasePath(state.projectId, teamName)}/${encodeURIComponent(
+      defaultDashboardId,
+    )}?api-version=${dashboardApiVersion}`,
+    { method: 'DELETE' },
+    signal,
+  )
+
   const created = await client.request<DashboardCreateResponse>(
-    `${dashboardsBasePath(state.projectId, teamName)}?api-version=7.1`,
+    `${dashboardsBasePath(state.projectId, teamName)}?api-version=${dashboardApiVersion}`,
     { method: 'POST', body: JSON.stringify(dashboard) },
     signal,
   )
@@ -243,7 +243,7 @@ async function provisionDashboard(
   await client.request<void>(
     `${dashboardsBasePath(state.projectId, teamName)}/${encodeURIComponent(
       temporaryDashboard.id,
-    )}?api-version=7.1`,
+    )}?api-version=${dashboardApiVersion}`,
     { method: 'DELETE' },
     signal,
   )

@@ -15,7 +15,7 @@ You need:
 - A [Visual Studio Marketplace publisher](https://marketplace.visualstudio.com/manage/publishers) that you control.
 - Permission to upload extensions for that publisher and share them with the test organization.
 
-The extension requests organization-wide scopes for projects, graph, work tracking, repositories, builds, releases, service endpoints, variable groups, deployment groups, tests, and wikis. Review the scopes in `extension/vss-extension.json` before installation.
+The extension requests organization-wide scopes for projects, graph, work tracking, repositories, builds, releases, service endpoints, variable groups, deployment groups, tests, wikis, and dashboards. Review the scopes in `extension/vss-extension.json` before installation.
 
 ## 1. Configure the package identity
 
@@ -232,6 +232,11 @@ Sign in as an organization administrator:
 4. Select **Template Projects** and choose **Install**.
 5. Review and approve the requested scopes.
 6. Refresh Azure DevOps after installation.
+
+When an update adds a scope such as `vso.dashboards_manage`, an organization
+administrator must approve the updated permissions before the extension's
+access token includes that scope. Reinstall or approve the update if Azure
+DevOps continues using permissions from an earlier version.
 
 The extension contributes **Template projects** to the organization-settings navigation. It does not appear as a project-level hub.
 
