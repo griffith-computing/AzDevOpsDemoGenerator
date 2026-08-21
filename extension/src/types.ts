@@ -45,6 +45,8 @@ export interface TemplateManifestEntry {
   files: string[]
   bundle: string
   capabilities: string[]
+  anonymousImportFiles: string[]
+  importOnlyServiceEndpoints: string[]
   requiredParameters: Array<{
     name: string
     secret: boolean

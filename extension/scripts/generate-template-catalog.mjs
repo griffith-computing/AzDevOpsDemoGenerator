@@ -44,13 +44,22 @@ function inferCapabilities(files) {
   return [...capabilities].sort()
 }
 
-async function discoverRequiredParameters(templateRoot, files) {
+function discoverRequiredParameters(files, bundle, excludedEndpointNames) {
   const serviceEndpointFiles = files.filter((file) =>
     /^ServiceEnd[Pp]oints\/.+\.json$/u.test(file),
   )
   const names = new Set()
   for (const file of serviceEndpointFiles) {
-    const text = await readFile(path.join(templateRoot, ...file.split('/')), 'utf8')
+    const endpoint = bundle[file]
+    if (
+      endpoint
+      && typeof endpoint === 'object'
+      && 'name' in endpoint
+      && excludedEndpointNames.has(endpoint.name)
+    ) {
+      continue
+    }
+    const text = JSON.stringify(endpoint)
     for (const match of text.matchAll(/\$(Apikey|GitUserName|GitUserPassword|password|URL|username)\$/gu)) {
       names.add(match[1])
     }
@@ -59,6 +68,45 @@ async function discoverRequiredParameters(templateRoot, files) {
     name,
     secret: /password|apikey/iu.test(name),
   }))
+}
+
+function discoverAnonymousImports(files, bundle) {
+  const anonymousImportFiles = []
+  const importOnlyServiceEndpoints = new Set()
+
+  for (const file of files.filter((value) => /^ImportSourceCode\/[^/]+\.json$/u.test(value))) {
+    const parameters = bundle[file]?.parameters
+    if (!isBundledPublicSource(parameters?.gitSource?.url)) {
+      continue
+    }
+
+    anonymousImportFiles.push(file)
+    const match = /^\$([^$]+)\$$/u.exec(parameters.serviceEndpointId?.trim() ?? '')
+    if (match) {
+      importOnlyServiceEndpoints.add(match[1])
+    }
+  }
+
+  return {
+    anonymousImportFiles,
+    importOnlyServiceEndpoints: [...importOnlyServiceEndpoints].sort(),
+  }
+}
+
+function isBundledPublicSource(value) {
+  if (typeof value !== 'string') return false
+
+  try {
+    const url = new URL(value)
+    if (url.protocol !== 'https:') return false
+    if (url.hostname.toLocaleLowerCase() === 'github.com') return true
+    return (
+      url.hostname.toLocaleLowerCase() === 'dev.azure.com'
+      && url.pathname.split('/').filter(Boolean)[0]?.toLocaleLowerCase() === 'vstsdemodata'
+    )
+  } catch {
+    return false
+  }
 }
 
 async function listFiles(root, current = root) {
@@ -112,12 +160,18 @@ if (!Array.isArray(catalog.GroupwiseTemplates)) {
             }
           }
           const bundlePath = assetName(template.TemplateFolder, '.json')
+          const importMetadata = discoverAnonymousImports(files, bundle)
           templateBundles[template.TemplateFolder] = bundle
           templateManifests[template.TemplateFolder] = {
             files,
             bundle: bundlePath,
             capabilities: inferCapabilities(files),
-            requiredParameters: await discoverRequiredParameters(templateRoot, files),
+            requiredParameters: discoverRequiredParameters(
+              files,
+              bundle,
+              new Set(importMetadata.importOnlyServiceEndpoints),
+            ),
+            ...importMetadata,
           }
         }
       } catch {
