@@ -6,21 +6,14 @@ import type {
 import { AzureDevOpsClient } from '../AzureDevOpsClient'
 import { TemplateAssetLoader } from '../TemplateAssetLoader'
 import { provisioningPhases } from './phases'
+import {
+  type CreatedProject,
+  type OperationReference,
+  waitForProjectCreation,
+} from './projectCreation'
 import { validateProjectName } from './projectName'
 import { runPhases } from './runPhases'
 import { createProvisioningState } from './types'
-
-interface OperationReference {
-  id: string
-  status?: string
-  url?: string
-}
-
-interface Project {
-  id: string
-  name: string
-  state: string
-}
 
 interface ProjectSettings {
   type?: string
@@ -101,14 +94,14 @@ export class ProvisioningEngine {
     projectName: string,
     settings: ProjectSettings,
     signal: AbortSignal,
-  ): Promise<Project> {
+  ): Promise<CreatedProject> {
     const processTemplateId =
       settings.id ?? processIds[(settings.type ?? 'scrum').toLocaleLowerCase()]
     if (!processTemplateId) {
       throw new Error(`Unsupported process template type: ${settings.type}.`)
     }
 
-    await this.client.request<OperationReference>(
+    const operation = await this.client.request<OperationReference>(
       '/_apis/projects?api-version=7.1',
       {
         method: 'POST',
@@ -123,37 +116,7 @@ export class ProvisioningEngine {
       signal,
     )
 
-    return this.pollProject(projectName, signal)
-  }
-
-  private async pollProject(
-    projectName: string,
-    signal: AbortSignal,
-  ): Promise<Project> {
-    const deadline = Date.now() + 5 * 60 * 1000
-    let delay = 1_000
-
-    while (Date.now() < deadline) {
-      const project = await this.client.request<Project>(
-        `/_apis/projects/${encodeURIComponent(projectName)}?includeCapabilities=false&api-version=7.1`,
-        {},
-        signal,
-      )
-
-      if (project.state.toLocaleLowerCase() === 'wellformed') {
-        return project
-      }
-
-      if (['deleting', 'createpending'].includes(project.state.toLocaleLowerCase())) {
-        await abortableDelay(delay, signal)
-        delay = Math.min(delay * 1.5, 5_000)
-        continue
-      }
-
-      throw new Error(`Project creation entered unexpected state: ${project.state}.`)
-    }
-
-    throw new Error('Project creation did not complete within five minutes.')
+    return waitForProjectCreation(this.client, operation, projectName, signal)
   }
 
   private emitStep(
@@ -164,18 +127,4 @@ export class ProvisioningEngine {
   ) {
     this.emit({ stepId, label, status, message })
   }
-}
-
-function abortableDelay(milliseconds: number, signal: AbortSignal): Promise<void> {
-  return new Promise((resolve, reject) => {
-    const timer = window.setTimeout(resolve, milliseconds)
-    signal.addEventListener(
-      'abort',
-      () => {
-        window.clearTimeout(timer)
-        reject(signal.reason)
-      },
-      { once: true },
-    )
-  })
 }
